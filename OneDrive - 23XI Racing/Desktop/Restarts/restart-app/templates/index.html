@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>23XI Restart Data</title>
+</head>
+<body>
+    <h1>23TEX1</h1>
+    <a href="{{ url_for('get_data') }}">Refresh Data</a>
+    <br>
+    <br>
+    <br>
+
+    {% for df in data %}
+    <table>
+        <caption>Table {{ loop.index }}</caption>
+        <thead>
+            <tr>
+                <!-- Generate table headers based on the data columns -->
+                {% for column in df.columns %}
+                <th>{{ column }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Generate table rows based on the data -->
+            {% for _, row in df.iterrows() %}
+            <tr>
+                {% for _, value in row.items() %}
+                <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    {% endfor %}
+</body>
+</html>
